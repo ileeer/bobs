@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone - Play Games Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🎮 GameZone</div>
+
+    <nav>
+        <button onclick="showHome()">Home</button>
+        <button onclick="filterCategory('Action')">Action</button>
+        <button onclick="filterCategory('Racing')">Racing</button>
+        <button onclick="filterCategory('Sports')">Sports</button>
+        <button onclick="filterCategory('Puzzle')">Puzzle</button>
+    </nav>
+
+    <div class="search">
+        <input id="searchBox" type="text" placeholder="Search games..." oninput="searchGames()">
+    </div>
+</header>
+
+<main>
+
+    <section class="hero">
+        <div>
+            <h1>PLAY AWESOME GAMES</h1>
+            <p>Free games. No download required.</p>
+            <button class="playButton" onclick="scrollToGames()">PLAY NOW</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>🔥 Popular Games</h2>
+        <div id="popularGames" class="gameGrid"></div>
+    </section>
+
+    <section>
+        <h2>🆕 New Games</h2>
+        <div id="newGames" class="gameGrid"></div>
+    </section>
+
+    <section id="allGamesSection">
+        <h2>🎮 All Games</h2>
+        <div id="allGames" class="gameGrid"></div>
+    </section>
+
+</main>
+
+<div id="gameScreen" class="gameScreen hidden">
+
+    <div class="gameTop">
+        <button onclick="closeGame()">← Back</button>
+        <h2 id="gameTitle"></h2>
+        <button onclick="fullscreenGame()">⛶ Fullscreen</button>
+    </div>
+
+    <div id="gameContainer"></div>
+
+</div>
+
+<footer>
+    <h3>🎮 GameZone</h3>
+    <p>Play free games online.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
