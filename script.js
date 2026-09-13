@@ -1,10 +1,13 @@
-function showHome() {
-    const games = document.querySelectorAll(".game-card");
+// GameZone button functions
 
+function showHome() {
+    // Show all game cards
+    const games = document.querySelectorAll(".game-card, .game");
     games.forEach(game => {
-        game.style.display = "block";
+        game.style.display = "";
     });
 
+    // Go to the top
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -12,42 +15,30 @@ function showHome() {
 }
 
 function filterCategory(category) {
-    const games = document.querySelectorAll(".game-card");
+    const games = document.querySelectorAll(".game-card, .game");
 
     games.forEach(game => {
-        const gameCategory = game.dataset.category;
+        const text = game.textContent.toLowerCase();
+        const dataCategory = (
+            game.getAttribute("data-category") || ""
+        ).toLowerCase();
 
-        if (category === "All" || gameCategory === category) {
-            game.style.display = "block";
+        if (
+            dataCategory === category.toLowerCase() ||
+            text.includes(category.toLowerCase())
+        ) {
+            game.style.display = "";
         } else {
             game.style.display = "none";
         }
     });
 }
 
-function searchGames() {
-    const searchBox = document.getElementById("searchInput");
-
-    if (!searchBox) return;
-
-    const search = searchBox.value.toLowerCase();
-    const games = document.querySelectorAll(".game-card");
-
-    games.forEach(game => {
-        const name = game.textContent.toLowerCase();
-
-        if (name.includes(search)) {
-            game.style.display = "block";
-        } else {
-            game.style.display = "none";
+// Make sure buttons don't accidentally submit forms
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("button").forEach(button => {
+        if (!button.getAttribute("type")) {
+            button.type = "button";
         }
     });
-}
-
-function playGame(url) {
-    if (url) {
-        window.open(url, "_blank");
-    }
-}
-
-console.log("GameZone JavaScript loaded!");
+});
