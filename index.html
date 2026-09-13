@@ -1,73 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameZone - Play Games Online</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GameZone — Free Browser Games</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<header>
-    <div class="logo">🎮 GameZone</div>
-
-    <nav>
-        <button onclick="showHome()">Home</button>
-        <button onclick="filterCategory('Action')">Action</button>
-        <button onclick="filterCategory('Racing')">Racing</button>
-        <button onclick="filterCategory('Sports')">Sports</button>
-        <button onclick="filterCategory('Puzzle')">Puzzle</button>
-    </nav>
-
-    <div class="search">
-        <input id="searchBox" type="text" placeholder="Search games..." oninput="searchGames()">
-    </div>
+<div id="app">
+<header class="topbar">
+  <a class="brand" href="#" onclick="goHome();return false;">🎮 <span>GameZone</span></a>
+  <nav class="nav">
+    <button onclick="goHome()">Home</button><button onclick="showCategory('Action')">Action</button>
+    <button onclick="showCategory('Racing')">Racing</button><button onclick="showCategory('Sports')">Sports</button>
+    <button onclick="showCategory('Puzzle')">Puzzle</button>
+  </nav>
+  <div class="top-actions">
+    <input id="search" placeholder="Search games..." autocomplete="off">
+    <button class="iconbtn" onclick="toggleTheme()" title="Theme">☀️</button>
+    <button class="profileBtn" onclick="openProfile()">👤 <span id="coinsTop">0</span> 🪙</button>
+  </div>
 </header>
 
-<main>
+<main id="homeView">
+  <section class="hero">
+    <div>
+      <span class="pill">FREE TO PLAY</span>
+      <h1>PLAY. WIN. <span>REPEAT.</span></h1>
+      <p>Fast browser games, no downloads. Build your profile, earn coins and climb the leaderboard.</p>
+      <button class="primary" onclick="document.getElementById('allGames').scrollIntoView({behavior:'smooth'})">🎮 Browse Games</button>
+    </div>
+    <div class="heroCard"><div class="bigEmoji">🏆</div><b>Daily Challenge</b><small>Play a game and earn bonus coins!</small><button onclick="playGame('reaction')">Play now →</button></div>
+  </section>
 
-    <section class="hero">
-        <div>
-            <h1>PLAY AWESOME GAMES</h1>
-            <p>Free games. No download required.</p>
-            <button class="playButton" onclick="scrollToGames()">PLAY NOW</button>
-        </div>
-    </section>
-
-    <section>
-        <h2>🔥 Popular Games</h2>
-        <div id="popularGames" class="gameGrid"></div>
-    </section>
-
-    <section>
-        <h2>🆕 New Games</h2>
-        <div id="newGames" class="gameGrid"></div>
-    </section>
-
-    <section id="allGamesSection">
-        <h2>🎮 All Games</h2>
-        <div id="allGames" class="gameGrid"></div>
-    </section>
-
+  <section class="section">
+    <div class="sectionHead"><h2>🔥 Popular</h2><button onclick="showCategory('All')">View all →</button></div>
+    <div id="popular" class="grid"></div>
+  </section>
+  <section class="section">
+    <div class="sectionHead"><h2>🆕 New games</h2></div>
+    <div id="newGames" class="grid"></div>
+  </section>
+  <section class="section" id="allGames">
+    <div class="sectionHead"><h2>🎮 All games</h2><span id="count"></span></div>
+    <div id="games" class="grid"></div>
+  </section>
 </main>
 
-<div id="gameScreen" class="gameScreen hidden">
+<section id="categoryView" class="hidden page">
+  <button class="back" onclick="goHome()">← Home</button>
+  <h1 id="categoryTitle"></h1><div id="categoryGames" class="grid"></div>
+</section>
 
-    <div class="gameTop">
-        <button onclick="closeGame()">← Back</button>
-        <h2 id="gameTitle"></h2>
-        <button onclick="fullscreenGame()">⛶ Fullscreen</button>
-    </div>
-
-    <div id="gameContainer"></div>
-
+<div id="gameModal" class="modal hidden">
+  <div class="gameWindow">
+    <div class="gameHeader"><button onclick="closeGame()">← Back</button><h2 id="gameTitle"></h2><button onclick="fullGame()">⛶</button></div>
+    <div id="gameArea"></div>
+  </div>
 </div>
 
-<footer>
-    <h3>🎮 GameZone</h3>
-    <p>Play free games online.</p>
-</footer>
+<div id="profileModal" class="modal hidden">
+  <div class="profileWindow">
+    <button class="close" onclick="closeProfile()">×</button>
+    <div class="avatar">🎮</div><h2>Player Profile</h2>
+    <p>Coins: <b id="profileCoins">0</b> 🪙</p>
+    <p>High scores: <b id="scoreCount">0</b></p>
+    <h3>⭐ Favorites</h3><div id="favorites" class="miniGrid"></div>
+  </div>
+</div>
 
+<footer>🎮 GameZone <span>•</span> Free browser games <span>•</span> Progress is saved on this device</footer>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
